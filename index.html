@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en"> <!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <title>LogIn</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/login.css" />
+
+
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar"></nav>
+
+    <div class="navbar"> </div>
+
+    <div class="logo">
+
+      <h1 style="text-shadow: 3px 3px 5px #333;font-size:5em;color: #afa9a9; margin-top: 20px;text-align: center;">
+        IKEA Apps</h1>
+    </div>
+
+
+    <section id="content" style="margin-top: 30px;">
+      <div class="for">
+        <h1>Login Form</h1>
+        <div>
+          <input type="text" placeholder="Username" required="" id="username" />
+        </div>
+        <div>
+          <input type="password" placeholder="Password" required="" id="password" />
+        </div>
+        <div>
+
+          <button class="btn" onclick="submit22()">Log In</button>
+          <a href="#">Lost your password?</a>
+
+        </div>
+      </div><!-- form -->
+
+    </section><!-- content -->
+  </div><!-- container -->
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-storage.js"></script>
+  <script src="js/login.js"></script>
+
+
+
+
+  <script>
+const firebaseConfig = {
+ apiKey: "AIzaSyBRsd_spphdiAQFhWxVTH04QjfQ9YVW64o",
+            authDomain: "wayfair-90895.firebaseapp.com",
+            databaseURL: "https://wayfair-90895-default-rtdb.firebaseio.com",
+            projectId: "wayfair-90895",
+            storageBucket: "wayfair-90895.firebasestorage.app",
+            messagingSenderId: "467519952493",
+            appId: "1:467519952493:web:2af581fe3c3ead11ed9164",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+    var uname = '';
+    var pss = '';
+
+    var userDataRef = firebase.database().ref("admin").child('w');
+
+    userDataRef.once('value').then((snapshot) => {
+
+      if (snapshot.exists()) {
+
+
+
+        uname = snapshot.val().admin;
+        pss = snapshot.val().pass;
+
+
+
+      }
+
+      console.log("gggggggggg" + uname);
+	   console.log("gggggggggg" + pss)
+
+
+
+
+    });
+
+    function submit22() {
+
+
+      console.log("gggggggggg" + uname)
+
+
+      var username = document.getElementById('username').value;
+      var pass = document.getElementById('password').value;
+      console.log(uname);
+      console.log(pss);
+
+       console.log("gggggggg   : "+username);
+      console.log('ddddddd  :'+pass);
+
+
+      if (username == uname && pass == pss) {
+
+
+        alert("Login was successful");
+
+
+
+        sessionStorage.setItem("username", username);
+
+        window.location = "dashboard.html";
+        return false;
+
+
+
+      }
+
+      else {
+        alert("Login was unsuccessful, please check your username and password");
+      }
+
+    
+    }
+  </script>
+
+
+</body>
+
+</html>
